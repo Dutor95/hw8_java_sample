@@ -30,14 +30,14 @@ pipeline {
                 }
               steps{
                sh 'mvn clean test'
-              } 
-           }
-           
+                  } 
+                }
+             } 
             stage('Build image') {
                steps {
                   sh ('docker build -t dkasymov/go-sample:${TAG} .')
-            }
-        }
+               }
+              }
 
             stage('Publish image') {
                when {
@@ -50,6 +50,7 @@ pipeline {
                     sh('docker login -u ${dockerHubUser} -p ${dockerHubPassword}')
                     sh('docker push dkasymov/go-sample:${TAG}')
                 }
-       }
-       
+               }
+            }  
+      }
 }
